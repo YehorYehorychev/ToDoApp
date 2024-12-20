@@ -12,7 +12,7 @@ abstract class TodosDatabase : RoomDatabase() {
     companion object {
 
         @Volatile
-        private var INSTANCE: TodosDatabase? null
+        private var INSTANCE: TodosDatabase? = null
 
         fun getInstance(context: Context): TodosDatabase {
             synchronized(this) {
