@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.yehorychev.importanttodos.TodosViewModel" />
     </data>
 
     <LinearLayout
@@ -17,19 +20,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter a Todo Item"
-            android:inputType="text" />
+            android:inputType="text"
+            android:text="@={viewModel.newTodoTitle}" />
 
         <Button
             android:id="@+id/todo_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:onClick="@{() -> viewModel.addTodo()}"
             android:text="Save Todo" />
 
         <TextView
             android:id="@+id/todos_list"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.todos}" />
 
     </LinearLayout>
 </layout>

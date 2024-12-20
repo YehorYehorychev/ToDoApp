@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.yehorychev.importanttodos.databinding.FragmentTodosBinding
 
 class TodosFragment : androidx.fragment.app.Fragment() {
@@ -16,6 +17,13 @@ class TodosFragment : androidx.fragment.app.Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTodosBinding.inflate(inflater, container, false)
+
+        val application = requireNotNull(this.activity).application
+        val dao = TodosDatabase.getInstance(application).todosDao
+        val viewModelFactory = TodosViewModelFactory(dao)
+        val viewModel = ViewModelProvider(this, viewModelFactory)[TodosViewModel::class.java]
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 }
