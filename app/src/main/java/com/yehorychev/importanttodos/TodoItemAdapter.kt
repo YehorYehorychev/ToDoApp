@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.yehorychev.importanttodos.util.ColorProvider
 
 class TodoItemAdapter : RecyclerView.Adapter<TodoItemAdapter.TodoItemViewHolder>() {
 
@@ -15,6 +16,15 @@ class TodoItemAdapter : RecyclerView.Adapter<TodoItemAdapter.TodoItemViewHolder>
         }
 
     override fun getItemCount(): Int = data.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoItemViewHolder =
+        TodoItemViewHolder.inflateFrom(parent)
+
+    override fun onBindViewHolder(holder: TodoItemViewHolder, position: Int) {
+        val item = data[position]
+        holder.bind(item)
+        holder.rootView.setCardBackgroundColor(ColorProvider.getColorResourceId(position))
+    }
 
     class TodoItemViewHolder(val rootView: CardView) : RecyclerView.ViewHolder(rootView) {
         private val todoTitle = rootView.findViewById<CheckBox>(R.id.todo_name)
