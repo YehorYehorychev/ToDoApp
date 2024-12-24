@@ -4,15 +4,17 @@ import android.graphics.Color
 
 object ColorProvider {
     private val colors = listOf(
-        Color.rgb(247, 37, 133),
-        Color.rgb(114, 9, 183),
-        Color.rgb(58, 12, 163),
-        Color.rgb(76, 201, 240),
-        Color.rgb(72, 191, 227),
-        Color.rgb(86, 207, 225),
-        Color.rgb(100, 223, 223),
-        Color.rgb(114, 239, 221),
-        Color.rgb(128, 255, 219),
+        Color.rgb(205, 180, 219),
+        Color.rgb(255, 200, 221),
+        Color.rgb(255, 175, 204),
+        Color.rgb(189, 224, 254),
+        Color.rgb(162, 210, 255),
+        Color.rgb(215, 227, 252),
+        Color.rgb(182, 204, 254),
+        Color.rgb(171, 196, 255),
+        Color.rgb(164, 195, 178),
+        Color.rgb(204, 227, 222),
+        Color.rgb(246, 255, 248),
     )
 
     fun getColorResourceId(position: Int): Int {
