@@ -5,6 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -19,12 +23,18 @@ class TodosViewModelTest {
     private lateinit var testDao: TodosDao
     private lateinit var todosViewModel: TodosViewModel
     private val emptyLiveDataList = MutableLiveData<List<Todo>>()
+    private val testDispatcher = StandardTestDispatcher()
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
         every { testDao.getAll() } returns emptyLiveDataList
         todosViewModel = TodosViewModel(testDao)
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
     }
 
     @Test
