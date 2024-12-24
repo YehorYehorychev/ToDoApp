@@ -6,33 +6,33 @@ import android.widget.CheckBox
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.yehorychev.importanttodos.databinding.TodoItemBinding
 import com.yehorychev.importanttodos.util.ColorProvider
 
-class TodoItemAdapter : ListAdapter<Todo, TodoItemAdapter.TodoItemViewHolder>(TodoItemCallback()) {
+class TodoItemAdapter(val clickListener: (todoId: Long) -> Unit) : ListAdapter<Todo, TodoItemAdapter.TodoItemViewHolder>(TodoItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoItemViewHolder =
         TodoItemViewHolder.inflateFrom(parent)
 
     override fun onBindViewHolder(holder: TodoItemViewHolder, position: Int) {
         val item = getItem(position)
+        val cardView = holder.binding.root as CardView
         holder.bind(item)
-        holder.rootView.setCardBackgroundColor(ColorProvider.getColorResourceId(position))
+        cardView.setCardBackgroundColor(ColorProvider.getColorResourceId(position))
     }
 
-    class TodoItemViewHolder(val rootView: CardView) : RecyclerView.ViewHolder(rootView) {
-        private val todoTitle = rootView.findViewById<CheckBox>(R.id.todo_name)
+    class TodoItemViewHolder(val binding: TodoItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         companion object {
             fun inflateFrom(parent: ViewGroup): TodoItemViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view = layoutInflater.inflate(R.layout.todo_item, parent, false) as CardView
-                return TodoItemViewHolder(view)
+                val binding = TodoItemBinding.inflate(layoutInflater, parent, false)
+                return TodoItemViewHolder(binding)
             }
         }
 
         fun bind(item: Todo) {
-            todoTitle.isChecked = item.completed
-            todoTitle.text = item.title
+            binding.todo = item
         }
     }
 }
