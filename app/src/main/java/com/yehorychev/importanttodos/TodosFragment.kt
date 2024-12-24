@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.yehorychev.importanttodos.databinding.FragmentTodosBinding
 
 class TodosFragment : androidx.fragment.app.Fragment() {
@@ -34,6 +35,19 @@ class TodosFragment : androidx.fragment.app.Fragment() {
                 adapter.submitList(it)
             }
         }
+        viewModel.navigateToTodo.observe(viewLifecycleOwner) { todoId ->
+            todoId?.let {
+                val action = TodosFragmentDirections.actionTodosFragmentToEditTodoFragment(todoId)
+                this.findNavController().navigate(action)
+                viewModel.onTodoItemNavigated()
+            }
+        }
+
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

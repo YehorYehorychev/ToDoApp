@@ -3,7 +3,7 @@ package com.yehorychev.importanttodos
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class EditTodoViewFactory(private val todoId: Long, private val dao: TodosDao) :
+class EditTodoViewModelFactory(private val todoId: Long, private val dao: TodosDao) :
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
