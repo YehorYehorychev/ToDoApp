@@ -29,7 +29,7 @@ class TodosFragment : androidx.fragment.app.Fragment() {
 
         viewModel.todos.observe(viewLifecycleOwner) { todosList ->
             todosList?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         }
         return binding.root
