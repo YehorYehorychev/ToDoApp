@@ -38,4 +38,16 @@ class TodosViewModelTest {
         // Then
         assertEquals(todosViewModel.navigateToTodo.value, todoId)
     }
+
+    @Test
+    fun `onTodoItemNavigated resets the navigateToTodo value to null`() {
+        // Given
+        todosViewModel.onTodoItemClicked(1L)
+
+        // When
+        todosViewModel.onTodoItemNavigated()
+
+        // Then
+        assertNull(todosViewModel.navigateToTodo.value)
+    }
 }
