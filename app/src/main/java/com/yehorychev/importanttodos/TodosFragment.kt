@@ -22,7 +22,9 @@ class TodosFragment : androidx.fragment.app.Fragment() {
         val dao = TodosDatabase.getInstance(application).todosDao
         val viewModelFactory = TodosViewModelFactory(dao)
         val viewModel = ViewModelProvider(this, viewModelFactory)[TodosViewModel::class.java]
-        val adapter = TodoItemAdapter()
+        val adapter = TodoItemAdapter { todoId ->
+            viewModel.onTodoItemClicked(todoId)
+        }
         binding.viewModel = viewModel
         binding.todosList.adapter = adapter
         binding.lifecycleOwner = viewLifecycleOwner

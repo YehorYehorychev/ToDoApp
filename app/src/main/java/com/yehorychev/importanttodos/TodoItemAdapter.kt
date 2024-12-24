@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yehorychev.importanttodos.databinding.TodoItemBinding
 import com.yehorychev.importanttodos.util.ColorProvider
 
-class TodoItemAdapter(val clickListener: (todoId: Long) -> Unit) : ListAdapter<Todo, TodoItemAdapter.TodoItemViewHolder>(TodoItemCallback()) {
+class TodoItemAdapter(private val clickListener: (todoId: Long) -> Unit) :
+    ListAdapter<Todo, TodoItemAdapter.TodoItemViewHolder>(TodoItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoItemViewHolder =
         TodoItemViewHolder.inflateFrom(parent)
@@ -17,7 +18,7 @@ class TodoItemAdapter(val clickListener: (todoId: Long) -> Unit) : ListAdapter<T
     override fun onBindViewHolder(holder: TodoItemViewHolder, position: Int) {
         val item = getItem(position)
         val cardView = holder.binding.root as CardView
-        holder.bind(item)
+        holder.bind(item, clickListener)
         cardView.setCardBackgroundColor(ColorProvider.getColorResourceId(position))
     }
 
@@ -31,8 +32,9 @@ class TodoItemAdapter(val clickListener: (todoId: Long) -> Unit) : ListAdapter<T
             }
         }
 
-        fun bind(item: Todo) {
+        fun bind(item: Todo, clickListener: (todoId: Long) -> Unit) {
             binding.todo = item
+            binding.root.setOnClickListener { clickListener(item.id) }
         }
     }
 }
