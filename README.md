@@ -30,8 +30,7 @@ Feel free to explore the code and test implementation. Feedback is always welcom
 
 ## How to Run
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YehorYehorychev/ToDoApp.git
+ Clone the repository:
+   ``git clone https://github.com/YehorYehorychev/ToDoApp.git``
 
 ![photo_5436320723263152659_y](https://github.com/user-attachments/assets/66381b08-05d7-433f-bfbe-3d40b6b00532)
